@@ -7,7 +7,7 @@ import MessageResponse from "./interfaces/MessageResponse"
 
 dotenv.config()
 
-const port = process.env.PORT
+const port = process.env.PORT || 8009
 const app: Express = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
