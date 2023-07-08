@@ -2,10 +2,11 @@ import mongoose from "mongoose"
 
 const connectDB = async () => {
 	try {
-		let MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/test"
+		let MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/pocket-url"
 		if (process.env.NODE_ENV == "development") {
 			MONGO_URI = "mongodb://127.0.0.1:27017/pocket-url"
 		}
+		console.log(MONGO_URI)
 		const conn = await mongoose.connect(MONGO_URI)
 		console.log(`🍀 MongoDB connected: ${conn.connection.host} - [${conn.connection.name}]`)
 	} catch (error) {
