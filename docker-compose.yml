@@ -1,12 +1,24 @@
-version: '3.9'
+version: "3.9"
 
 services:
   api:
-    build:
-      context: .
-      dockerfile: ./Dockerfile.dev
+    build: .
+    container_name: pocket_api
     environment:
       - PORT=${PORT}
+      - MONGO_URI=${MONGO_URI}
+      - NODE_ENV=${NODE_ENV}
+    env_file:
+      - ./.env
     ports:
       - ${PORT}:${PORT}
+    restart: on-failure
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    container_name: mongo_db
+    command: mongod --quiet --logpath /dev/null
+    ports:
+      - "27017:27017"
     restart: on-failure
